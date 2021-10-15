@@ -7,7 +7,7 @@ import { getRelativeTSPath, parseBoolean, writeTSFile } from './util'
 import { INDEX_TEMPLATE } from './templates'
 import { PrismaImport } from './components/import'
 
-export const GENERATOR_NAME = 'Prisma Class Generator'
+export const GENERATOR_NAME = 'Prisma Entity Generator'
 export interface PrismaClassGeneratorConfig {
 	useSwagger: boolean
 	dryRun: boolean
