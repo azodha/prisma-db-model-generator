@@ -1,3 +1,5 @@
+Original Repo - https://github.com/kimjbstar/prisma-class-generator
+
 # Prisma Class Generator
 
 ## **Prisma**
