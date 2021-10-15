@@ -9,14 +9,14 @@ export class GeneratorFormatNotValidError extends Error {
 	}
 }
 
-export class GeneratorPathNotExists extends Error {}
+export class GeneratorPathNotExists extends Error { }
 
 export const handleGenerateError = (e: Error) => {
 	if (e instanceof GeneratorFormatNotValidError) {
 		log('Usage Example')
 		log(`
 generator prismaClassGenerator {
-	provider	= "prisma-class-generator"
+	provider	= "prisma-entity-generator"
 	output		= (string)
 	dryRun   	= (boolean)
 	useSwagger	= (boolean)
