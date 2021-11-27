@@ -1,6 +1,6 @@
 {
 	"name": "prisma-entity-generator",
-	"version": "0.1.15",
+	"version": "0.1.16",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
 	"license": "MIT",
