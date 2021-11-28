@@ -1,6 +1,6 @@
 {
 	"name": "prisma-entity-generator",
-	"version": "0.1.16",
+	"version": "0.1.17",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
 	"license": "MIT",
@@ -29,10 +29,12 @@
 		"name": "kimjbstar",
 		"email": "kimjbstar@gmail.com"
 	},
-	"contributors": [{
-		"name": "shalabh1801",
-		"email": "shalabh1801@gmail.com"
-	}],
+	"contributors": [
+		{
+			"name": "shalabh1801",
+			"email": "shalabh1801@gmail.com"
+		}
+	],
 	"dependencies": {
 		"@prisma/client": "3.1.1",
 		"@prisma/generator-helper": "^3.1.1",

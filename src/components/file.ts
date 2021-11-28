@@ -58,11 +58,6 @@ export class PrismaClassFile implements Echoable {
 				return result
 			}, [])
 			.join('\r\n')
-			.replace('../../../node_modules/', '')
-			.replace('../../node_modules/', '')
-			.replace('../node_modules/', '')
-			.replace('node_modules/', '')
-			.replace('../@prisma/client', '@prisma/client')
 	}
 
 	echo = () => {
@@ -91,7 +86,7 @@ export class PrismaClassFile implements Echoable {
 			)
 		})
 		this.prismaClass.enumTypes.forEach((enumName) => {
-			this.registerImport(enumName, generator.getClientImportPath())
+			this.registerImport(enumName, generator.getClientImportPath(this.dir))
 		})
 
 		this.prismaClass.decorators.forEach((decorator) => {

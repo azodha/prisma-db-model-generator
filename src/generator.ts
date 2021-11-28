@@ -43,12 +43,12 @@ export class PrismaClassGenerator {
 		return PrismaClassGenerator.instance
 	}
 
-	getClientImportPath() {
-		if (!this.rootPath || !this.clientPath) {
+	getClientImportPath(from = this.rootPath) {
+		if (!from || !this.clientPath) {
 			throw new GeneratorPathNotExists()
 		}
 		return path
-			.relative(this.rootPath, this.clientPath)
+			.relative(from, this.clientPath)
 			.replace('node_modules/', '')
 	}
 
