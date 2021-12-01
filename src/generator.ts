@@ -47,6 +47,14 @@ export class PrismaClassGenerator {
 		if (!from || !this.clientPath) {
 			throw new GeneratorPathNotExists()
 		}
+
+		const nmFolderName = 'node_modules'
+		const nmPathIndex = this.clientPath.indexOf(nmFolderName)
+		if (nmPathIndex >= 0) {
+			const pathTillNmFolder = this.clientPath.substr(0, nmPathIndex + `${nmFolderName}/`.length)
+			return this.clientPath.replace(pathTillNmFolder, '')
+		}
+
 		return path
 			.relative(from, this.clientPath)
 			.replace('node_modules/', '')

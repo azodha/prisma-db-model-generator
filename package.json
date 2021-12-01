@@ -1,6 +1,6 @@
 {
 	"name": "prisma-entity-generator",
-	"version": "0.1.17",
+	"version": "0.1.19",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
 	"license": "MIT",
@@ -17,7 +17,8 @@
 	},
 	"scripts": {
 		"format": "prettier --write \"src/**/*.ts\"",
-		"dev": "node -r ts-node/register src/index.ts"
+		"dev": "node -r ts-node/register src/index.ts",
+		"prepublish": "tsc"
 	},
 	"bin": {
 		"prisma-entity-generator": "dist/bin.js"
