@@ -1,5 +1,5 @@
 {
-	"name": "prisma-db-model-generator",
+	"name": "@azodha/prisma-db-model-generator",
 	"version": "0.1.0",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
@@ -11,7 +11,7 @@
 		"generator"
 	],
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"registry": "https://npm.pkg.github.com/azodha"
 	},
 	"homepage": "https://github.com/azodha/prisma-db-model-generator",
 	"repository": {
