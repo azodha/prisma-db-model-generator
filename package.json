@@ -1,5 +1,5 @@
 {
-	"name": "prisma-class-generator",
+	"name": "prisma-db-model-generator",
 	"version": "0.2.5",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
@@ -10,10 +10,10 @@
 		"typescript",
 		"generator"
 	],
-	"homepage": "https://github.com/shalabh1801/prisma-class-generator",
+	"homepage": "https://github.com/azodha/prisma-db-model-generator",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/shalabh1801/prisma-class-generator.git"
+		"url": "https://github.com/azodha/prisma-db-model-generator.git"
 	},
 	"scripts": {
 		"format": "prettier --write \"src/**/*.ts\"",
@@ -24,7 +24,7 @@
 		"generate:mongodb": "prisma generate --schema prisma/mongodb.prisma"
 	},
 	"bin": {
-		"prisma-entity-generator": "dist/bin.js"
+		"prisma-db-model-generator": "dist/bin.js"
 	},
 	"engines": {
 		"node": ">=14"
