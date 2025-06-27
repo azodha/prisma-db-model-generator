@@ -50,7 +50,13 @@ export class FileComponent implements Echoable {
 		this._prismaClass = classComponent
 		this.dir = path.resolve(output)
 		this.filename = `${snakeCase(classComponent.name)}.ts`
-		this.resolveImports()
+		// this.resolveImports()
+		// 	.then(() => {
+		// 		console.log('Imports resolved successfully!')
+		// 	})
+		// 	.catch((e) => {
+		// 		console.log('Error resolving imports!')
+		// 	})
 	}
 
 	echoImports = () => {
@@ -79,8 +85,8 @@ export class FileComponent implements Echoable {
 		this.imports.push(new ImportComponent(from, item))
 	}
 
-	resolveImports() {
-		const generator = PrismaClassGenerator.getInstance()
+	async resolveImports() {
+		const generator = await PrismaClassGenerator.getInstance()
 		this.prismaClass.relationTypes.forEach((relationClassName) => {
 			this.registerImport(
 				`${pascalCase(relationClassName)}`,
@@ -88,7 +94,10 @@ export class FileComponent implements Echoable {
 			)
 		})
 		this.prismaClass.enumTypes.forEach((enumName) => {
-			this.registerImport(enumName, generator.getClientImportPath(this.dir))
+			this.registerImport(
+				enumName,
+				generator.getClientImportPath(this.dir),
+			)
 		})
 
 		this.prismaClass.decorators.forEach((decorator) => {
@@ -109,10 +118,13 @@ export class FileComponent implements Echoable {
 		}
 	}
 
-	write(dryRun: boolean) {
-		const generator = PrismaClassGenerator.getInstance()
+	async write(dryRun: boolean) {
+		const generator = await PrismaClassGenerator.getInstance()
 		const filePath = path.resolve(this.dir, this.filename)
-		const content = prettierFormat(this.echo(), generator.prettierOptions)
+		const content = await prettierFormat(
+			this.echo(),
+			generator.prettierOptions,
+		)
 		writeTSFile(filePath, content, dryRun)
 	}
 

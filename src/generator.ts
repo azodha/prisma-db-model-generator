@@ -60,12 +60,6 @@ export class PrismaClassGenerator {
 		if (options) {
 			this.options = options
 		}
-		const output = parseEnvValue(options.generator.output!)
-		this.prettierOptions =
-			prettier.resolveConfig.sync(output, { useCache: false }) ||
-			prettier.resolveConfig.sync(path.dirname(require.main.filename), {
-				useCache: false,
-			})
 	}
 
 	public get options() {
@@ -84,12 +78,23 @@ export class PrismaClassGenerator {
 		this._prettierOptions = value
 	}
 
-	static getInstance(options?: GeneratorOptions) {
+	static async getInstance(options?: GeneratorOptions) {
 		if (PrismaClassGenerator.instance) {
 			return PrismaClassGenerator.instance
 		}
-		PrismaClassGenerator.instance = new PrismaClassGenerator(options)
-		return PrismaClassGenerator.instance
+		const instance = new PrismaClassGenerator(options)
+		await instance.initPrettierOptions()
+		PrismaClassGenerator.instance = instance
+		return instance
+	}
+
+	async initPrettierOptions() {
+		const output = parseEnvValue(this.options.generator.output!)
+		this.prettierOptions =
+			(await prettier.resolveConfig(output, { useCache: false })) ||
+			(await prettier.resolveConfig(path.dirname(require.main.filename), {
+				useCache: false,
+			}))
 	}
 
 	getClientImportPath(from = this.rootPath) {
@@ -140,11 +145,17 @@ export class PrismaClassGenerator {
 			(classComponent) => new FileComponent({ classComponent, output }),
 		)
 
-		const classToPath = files.reduce((result, fileRow) => {
-			const fullPath = path.resolve(fileRow.dir, fileRow.filename)
-			result[fileRow.prismaClass.name] = fullPath
-			return result
-		}, {} as Record<string, string>)
+		// Resolve imports for all files
+		await Promise.all(files.map((file) => file.resolveImports()))
+
+		const classToPath = files.reduce(
+			(result, fileRow) => {
+				const fullPath = path.resolve(fileRow.dir, fileRow.filename)
+				result[fileRow.prismaClass.name] = fullPath
+				return result
+			},
+			{} as Record<string, string>,
+		)
 
 		files.forEach((fileRow) => {
 			fileRow.imports = fileRow.imports.map((importRow) => {
@@ -156,9 +167,7 @@ export class PrismaClassGenerator {
 			})
 		})
 
-		files.forEach((fileRow) => {
-			fileRow.write(config.dryRun)
-		})
+		await Promise.all(files.map((fileRow) => fileRow.write(config.dryRun)))
 		if (config.makeIndexFile) {
 			const indexFilePath = path.resolve(output, 'index.ts')
 			const imports = files.map(
@@ -183,7 +192,7 @@ export class PrismaClassGenerator {
 					'#!{CLASSES}',
 					files.map((f) => f.prismaClass.name).join(', '),
 				)
-			const formattedContent = prettierFormat(
+			const formattedContent = await prettierFormat(
 				content,
 				this.prettierOptions,
 			)
