@@ -21,8 +21,8 @@ jobs:
               run: node -v
             - name: Install dependencies
               run: npm ci
-            - name: Build Library
-              run: npm run build
+            - name: Pre publish check
+              run: npm run prepublish
             - name: Release
               env:
                   GITHUB_TOKEN: ${{ secrets.npm_token }}
