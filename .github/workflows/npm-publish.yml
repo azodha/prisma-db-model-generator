@@ -25,6 +25,6 @@ jobs:
               run: npm run prepublish
             - name: Release
               env:
-                  GITHUB_TOKEN: ${{ secrets.npm_token }}
-                  NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: npx semantic-release
