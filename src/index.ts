@@ -11,7 +11,8 @@ generatorHandler({
 	}),
 	onGenerate: async (options: GeneratorOptions) => {
 		try {
-			await PrismaClassGenerator.getInstance(options).run()
+			const generator = await PrismaClassGenerator.getInstance(options)
+			await generator.run()
 		} catch (e) {
 			handleGenerateError(e)
 			return
