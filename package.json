@@ -1,6 +1,6 @@
 {
 	"name": "@azodha/prisma-db-model-generator",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Class generator from Prisma schema",
 	"main": "dist/index.js",
 	"license": "MIT",
