@@ -43,15 +43,15 @@
 		}
 	],
 	"dependencies": {
-		"@prisma/client": "^6.10.1",
-		"@prisma/generator-helper": "^6.10.1",
-		"@prisma/internals": "^6.10.1",
+		"@prisma/client": "^6.19.0",
+		"@prisma/generator-helper": "^6.19.0",
+		"@prisma/internals": "^6.19.0",
 		"@semantic-release/changelog": "^6.0.3",
 		"@semantic-release/git": "^10.0.1",
 		"@semantic-release/github": "^12.0.2",
 		"change-case": "^4.1.2",
 		"prettier": "^3.6.0",
-		"semantic-release": "^25.0.2"
+		"semantic-release": "^24.2.9"
 	},
 	"devDependencies": {
 		"@opentelemetry/api": "^1.9.0",
@@ -64,7 +64,7 @@
 		"fs-jetpack": "^5.1.0",
 		"http-proxy-agent": "^7.0.2",
 		"https-proxy-agent": "^7.0.6",
-		"prisma": "^6.10.1",
+		"prisma": "^6.19.0",
 		"resolve": "^1.22.10",
 		"swagger-ui-express": "^5.0.1",
 		"ts-node": "^10.9.2",
